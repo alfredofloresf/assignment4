@@ -1,0 +1,26 @@
+version: '3.6'
+services:
+  web:
+    build: .
+    image: newimage:latest
+    ports:
+     - "8080:5000"
+    deploy:
+      mode: replicated
+      replicas: 4
+    secrets:
+      - admin_password
+      - csrf_secret_key_password
+
+
+#secrets:
+#   admin_password:
+#     external: true
+#   csrf_secret_key_password:
+#     external: true
+
+secrets:
+  admin_password:
+    file: ./admin_password.txt
+  csrf_secret_key_password:
+    file: ./csrf_secret_key.txt

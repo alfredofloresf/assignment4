@@ -1,0 +1,48 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Login
+{% endblock %}
+
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+
+    {% if form %}
+    <h1>Login History Search</h1>
+    <form action="" method="post" value="" autocomplete="off">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.uid.label }}<br>
+            {{ form.uid(size=32) }}<br>
+            {% for error in form.uid.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    {% else %}
+
+    <h1>Login History Search Result</h1>
+
+    {% for login in logins %}
+    <p id=login{{ login.id }}>
+    Session {{ login.id }} login_time: <b id=login{{ login.id }}_time>{{ login.login_time }}</b>
+	logout_time: <b id=logout{{ login.id }}_time>{{ login.logout_time }}</b>
+    </p>
+    {% endfor %}
+
+    {% endif %}
+
+{% endblock %}
