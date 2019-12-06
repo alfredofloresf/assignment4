@@ -4,20 +4,13 @@ services:
     build: .
     image: newimage:latest
     ports:
-     - "8080:5000"
+     - "8080:8080"
     deploy:
       mode: replicated
       replicas: 4
     secrets:
       - admin_password
       - csrf_secret_key_password
-
-
-#secrets:
-#   admin_password:
-#     external: true
-#   csrf_secret_key_password:
-#     external: true
 
 secrets:
   admin_password:
